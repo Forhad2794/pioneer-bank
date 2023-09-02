@@ -31,19 +31,19 @@
             <div class="col-md-4">
                 <div class="deposit transaction-item">
                     <h5>Deposit</h5>
-                    <h2>$ 00</h2>
+                    <h2>$ <span id="currentDeposit">00</span></h2>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="withdraw transaction-item">
                     <h5>Withdraw</h5>
-                    <h2>$ 00</h2>
+                    <h2>$<span id="currentWithdraw">00</span></h2>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="balance transaction-item">
                     <h5>Balance</h5>
-                    <h2>$ 00</h2>
+                    <h2>$ <span id="currentBalance">1000</span></h2>
                 </div>
             </div>
         </div>
@@ -51,16 +51,18 @@
             <div class="col-md-6">
                 <div class="submit-area">
                     <h4>Deposit</h4>
-                    <input type="text" class="form-control" placeholder="$ Amount You Want To Deposit"><br>
-                    <button class="btn btn-success">Deposit</button>
+                    <input type="text" id="depositAmount" class="form-control"
+                        placeholder="$ Amount You Want To Deposit"><br>
+                    <button class="btn btn-success" id="addDeposit">Deposit</button>
                 </div>
 
             </div>
             <div class="col-md-6">
                 <div class="submit-area">
                     <h4>Withdraw</h4>
-                    <input type="text" class="form-control" placeholder="$ Amount You Want To Withdraw"><br>
-                    <button class="btn btn-success">Withdraw</button>
+                    <input type="text" id="withdrawAmount" class="form-control"
+                        placeholder="$ Amount You Want To Withdraw"><br>
+                    <button class="btn btn-success" id="withdrawBtn">Withdraw</button>
                 </div>
 
             </div>
@@ -75,7 +77,28 @@
             const transactionArea = document.getElementById("transaction-area");
             transactionArea.style.display = "block";
         })
+        const depositBtn = document.getElementById("addDeposit");
+        depositBtn.addEventListener("click", function () {
 
+           const depositNumber = getInputNumber("depositAmount");
+
+            updateSpanText("currentDeposit", depositNumber);
+            updateSpanText("currentBalance", depositNumber);
+           
+            document.getElementById("depositAmount").value = "";
+            
+        })
+        function updateSpanText(id, depositNumber){
+            const current= document.getElementById(id).innerText;
+            const currentNumber = parseFloat(current);
+            const total = depositNumber + currentNumber;
+            document.getElementById(id).innerText = total;
+        }
+        function getInputNumber(id){
+            const amount = document.getElementById(id).value;
+            const amountNumber = parseFloat(amount);
+            return amountNumber;
+        }
     </script>
 </body>
 
