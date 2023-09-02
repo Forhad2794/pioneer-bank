@@ -88,6 +88,18 @@
             document.getElementById("depositAmount").value = "";
             
         })
+        const withdrawBtn = document.getElementById("withdrawBtn");
+            withdrawBtn.addEventListener("click", function () {
+
+           const withdrawNumber = getInputNumber("withdrawAmount");
+
+            updateSpanText("currentWithdraw", withdrawNumber);
+            updateSpanText("currentBalance", -1 *withdrawNumber);
+           
+           
+            document.getElementById("withdrawAmount").value = "";
+            
+        })
         function updateSpanText(id, depositNumber){
             const current= document.getElementById(id).innerText;
             const currentNumber = parseFloat(current);
